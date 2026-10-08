@@ -6,7 +6,8 @@ import { Routes } from '../../api/endpoints/routes';
 import { DataProvider } from '../../utils/DataReader';
 import { RandomDataUtil } from '../../utils/dataGenerator';
 
-dotenv.config();
+const dotenvConfig = dotenv.config();
+const dotenvValues = dotenvConfig.parsed ?? {};
 
 type Product = {
     id: number;
@@ -35,8 +36,16 @@ test.describe('FakeStore API Tests', () => {
     // ---------------------------------------------------------
 
     const BASE_URL = process.env.API_BASE_URL || Routes.BASE_URL;
-    const USERNAME = process.env.USERNAME;
-    const PASSWORD = process.env.PASSWORD;
+    const USERNAME =
+        process.env.API_USERNAME ??
+        dotenvValues.API_USERNAME ??
+        dotenvValues.USERNAME ??
+        process.env.USERNAME;
+    const PASSWORD =
+        process.env.API_PASSWORD ??
+        dotenvValues.API_PASSWORD ??
+        process.env.PASSWORD ??
+        dotenvValues.PASSWORD;
     const USER_ID = Number(process.env.USER_ID ?? 1);
     const PRODUCT_ID = Number(process.env.PRODUCT_ID ?? 1);
     const CART_ID = Number(process.env.CART_ID ?? 1);
