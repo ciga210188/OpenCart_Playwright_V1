@@ -16,11 +16,11 @@ on:
           - test:master
           - test:sanity
           - test:regression
-          - test:e2e
+          - test:end-to-end
           - test:api
           - test:web
           - test:datadriven
-        default: "test:e2e"
+        default: "test:end-to-end"
       browser:
         description: "Select browser"
         type: choice
@@ -55,7 +55,7 @@ jobs:
         run: Copy-Item .env.example .env
       - name: 🧪 Run Playwright Tests
         run: |
-          $suite = "${{ github.event.inputs.test_suite || 'test:e2e' }}"
+          $suite = "${{ github.event.inputs.test_suite || 'test:end-to-end' }}"
           $browser = "${{ github.event.inputs.browser || 'chromium' }}"
           $mode = "${{ github.event.inputs.mode || 'headless' }}"
           $tag = $suite -replace 'test:', ''
