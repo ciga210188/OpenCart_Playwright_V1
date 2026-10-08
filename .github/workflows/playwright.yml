@@ -16,11 +16,11 @@ on:
           - test:master
           - test:sanity
           - test:regression
-          - test:end-to-end
+          - test:e2e
           - test:api
           - test:web
           - test:datadriven
-        default: "test:end-to-end"
+        default: "test:e2e"
       browser:
         description: "Select browser"
         type: choice
